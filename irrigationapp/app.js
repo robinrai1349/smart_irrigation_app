@@ -38,4 +38,13 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const PORT = process.env.PORT || 3000;
+const HOST = '0.0.0.0';
+app.listen(PORT, HOST, () => {
+    console.log(`\nServer is running on http://${HOST}:${PORT}\n`);
+});
+
 module.exports = app;
+
+
+
