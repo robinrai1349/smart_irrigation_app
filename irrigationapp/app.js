@@ -70,9 +70,9 @@ app.use(function(err, req, res, next) {
 });
 
 const PORT = process.env.PORT || 3000;
-const HOST = '0.0.0.0';
+const HOST = '127.0.0.1';
 app.listen(PORT, HOST, () => {
-    console.log(`\nServer is running on http://${HOST}:${PORT}\n`);
+    console.log(`\nPage available at http://${HOST}:${PORT}\n`);
 });
 
 module.exports = app;

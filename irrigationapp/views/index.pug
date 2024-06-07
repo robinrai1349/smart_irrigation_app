@@ -1,15 +1,23 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  button(onclick="sendCommand('START_PUMP_1')") Start Pump 1
-  button(onclick="sendCommand('STOP_PUMP_1')") Stop Pump 1
-  button(onclick="sendCommand('START_PUMP_2')") Start Pump 2
-  button(onclick="sendCommand('STOP_PUMP_2')") Stop Pump 2
-  button(onclick="sendCommand('START_PUMP_3')") Start Pump 3
-  button(onclick="sendCommand('STOP_PUMP_3')") Stop Pump 3
-  button(onclick="sendCommand('START_ALL')") Start All Pumps
-  button(onclick="sendCommand('STOP_ALL')") Stop All Pumps
+  header
+    img(src='/images/svgs/Pump.svg', alt='Pump')
+    h1=title
+    h2#currentTime 00:00
+
+  div.onOffControl
+    button(onclick="sendCommand('START_ALL')") ON
+    button(onclick="sendCommand('STOP_ALL')") OFF
+    button(onclick="sendCommand('START_PUMP_1')") Start Pump 1
+    button(onclick="sendCommand('STOP_PUMP_1')") Stop Pump 1
+    button(onclick="sendCommand('START_PUMP_2')") Start Pump 2
+    button(onclick="sendCommand('STOP_PUMP_2')") Stop Pump 2
+    button(onclick="sendCommand('START_PUMP_3')") Start Pump 3
+    button(onclick="sendCommand('STOP_PUMP_3')") Stop Pump 3
+
+    
+
+
   button(onclick="sendCommand('DELAY_10')") Delay 10 Seconds
   
