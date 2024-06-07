@@ -1,3 +1,4 @@
+
 doctype html 
 html 
   head 
@@ -6,6 +7,16 @@ html
   body 
     h1 Smart Irrigation System 
     p Welcome to the smart irrigation system dashboard.
+    button(onclick="sendCommand('START_PUMP_1')") Start Pump 1
+    button(onclick="sendCommand('STOP_PUMP_1')") Stop Pump 1
+    button(onclick="sendCommand('START_PUMP_2')") Start Pump 2
+    button(onclick="sendCommand('STOP_PUMP_2')") Stop Pump 2
+    button(onclick="sendCommand('START_PUMP_3')") Start Pump 3
+    button(onclick="sendCommand('STOP_PUMP_3')") Stop Pump 3
+    button(onclick="sendCommand('START_ALL')") Start All Pumps
+    button(onclick="sendCommand('STOP_ALL')") Stop All Pumps
+    button(onclick="sendCommand('DELAY_10')") Delay 10 Seconds
+
     if sensors && sensors.length 
       ul 
       each sensor in sensors 
