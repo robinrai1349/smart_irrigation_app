@@ -92,15 +92,15 @@ app.use(function(err, req, res, next) {
 });
 
 
-const PORT = process.env.PORT || 3000;
-const HOST = '0.0.0.0';
-app.set('port', PORT);
+const port = process.env.PORT || 3000;
+
+app.set('port', port);
 
 const server = http.createServer(app);
 
-server.listen(PORT, HOST);
+server.listen(port);
 server.on('listening', () => {
-    console.log(`\nServer is running on http://${HOST}:${PORT}\n`);
+    console.log(`\nServer is running on http://$0.0.0.0:${port}\n`);
 });
 
 module.exports = app;
