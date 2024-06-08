@@ -27,3 +27,14 @@ exports.getAllSensorData = async (req, res) => {
         res.status(500).json({message: err.message});
     }
 };
+
+const getSensorData = async (lat, lon) => {
+    try {
+        const data = await Sensor.find();
+        return data
+    } catch (err) {
+        throw new Error(`Failed to fetch sensor data: ${err.message}`);
+    }
+}
+
+module.exports = { getSensorData };

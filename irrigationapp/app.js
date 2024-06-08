@@ -12,6 +12,7 @@ dotenv.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var weatherRouter = require('./routes/weather');
 
 var app = express();
 
@@ -57,6 +58,7 @@ app.use('/', indexRouter);
 
 // Routes
 app.use('/users', usersRouter);
+app.use('/weather', weatherRouter);
 
 // Endpoint to handle commands from the front end
 app.post('/send-command', (req, res) => {
