@@ -7,11 +7,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var dgram = require('dgram');  // Add the dgram module
 
-const http = require('http');
-const app = require('./app.js');
-
-
-
 // Load environment variables from .env file
 dotenv.config();
 
@@ -89,18 +84,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-
-
-const port = process.env.PORT || 3000;
-
-app.set('port', port);
-
-const server = http.createServer(app);
-
-server.listen(port);
-server.on('listening', () => {
-    console.log(`\nServer is running on http://$0.0.0.0:${port}\n`);
 });
 
 module.exports = app;
