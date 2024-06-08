@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
       const weatherData = await getWeather(lat, lon);
       const sensors = await getSensorData();
       
-      console.log("heloo")
       res.render('index', { title: 'Smart Irrigation System', weatherData, sensors});
     } catch (error) {
       res.status(500).json({ error: error.message });
