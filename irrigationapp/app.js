@@ -15,7 +15,6 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-<<<<<<< HEAD
 // Define UDP server details
 const UDP_HOST = '192.168.137.229'; 
 const UDP_PORT = 4210; 
@@ -35,12 +34,6 @@ function sendUdpCommand(command, res) {
         }
     });
 }
-=======
-// MongoDB connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Faild to connect to MongoDB', err));
->>>>>>> main
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
