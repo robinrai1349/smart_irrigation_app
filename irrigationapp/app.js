@@ -11,7 +11,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // Define UDP server details
-const UDP_HOST = '192.168.137.116'; 
+const UDP_HOST = '192.168.137.229'; 
 const UDP_PORT = 4210; 
 
 // Function to send UDP commands
