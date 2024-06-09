@@ -1,15 +1,21 @@
 var createError = require('http-errors');
 var express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var dgram = require('dgram');  // Add the dgram module
+
+// Load environment variables from .env file
+dotenv.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
+<<<<<<< HEAD
 // Define UDP server details
 const UDP_HOST = '192.168.137.229'; 
 const UDP_PORT = 4210; 
@@ -29,18 +35,29 @@ function sendUdpCommand(command, res) {
         }
     });
 }
+=======
+// MongoDB connection
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Faild to connect to MongoDB', err));
+>>>>>>> main
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+// Middleware to parse JSON bodies
 app.use(express.json());
+
+app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Home routeq
 app.use('/', indexRouter);
+
+// Routes
 app.use('/users', usersRouter);
 
 // Endpoint to handle commands from the front end

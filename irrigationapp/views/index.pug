@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 extends layout
 
 block content
@@ -57,3 +58,19 @@ block content
     h1 Graph
     canvas(id="CO2_Graph_Canvas" role="img")
   
+=======
+doctype html 
+html 
+  head 
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body 
+    h1 Smart Irrigation System 
+    p Welcome to the smart irrigation system dashboard.
+    if sensors && sensors.length 
+      ul 
+      each sensor in sensors 
+        li #{sensor.sensorType}: #{sensor.value} at #{sensor.timestamp}
+    else 
+      p No sensor data available.
+>>>>>>> main
