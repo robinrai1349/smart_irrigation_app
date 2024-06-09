@@ -1,39 +1,81 @@
+extends layout
 
-doctype html 
-html 
-  head 
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src="/sendCommand.js")
-  body 
-    h1 Smart Irrigation System 
-    p Welcome to the smart irrigation system dashboard.
+block content
+  header
+    img(src='/images/svgs/Pump.svg', alt='Pump')
+    h1=title
+    a(href="#")
+      img(src='/images/svgs/Translate App.svg', alt='Pump')
+    h2#currentTime 00:00
 
+
+  div.onOffControl
+    img(src='/images/svgs/Pump.svg', alt='Pump')
+    h4 Pump 1
+    h4 Pump 2
+    h4 Pump 3
     button(onclick="sendCommand('START_PUMP_1')") Start Pump 1
-    button(onclick="sendCommand('STOP_PUMP_1')") Stop Pump 1
+    //- button(onclick="sendCommand('STOP_PUMP_1')") Stop Pump 1
     button(onclick="sendCommand('START_PUMP_2')") Start Pump 2
-    button(onclick="sendCommand('STOP_PUMP_2')") Stop Pump 2
+    //- button(onclick="sendCommand('STOP_PUMP_2')") Stop Pump 2
     button(onclick="sendCommand('START_PUMP_3')") Start Pump 3
-    button(onclick="sendCommand('STOP_PUMP_3')") Stop Pump 3
-    button(onclick="sendCommand('START_ALL')") Start All Pumps
-    button(onclick="sendCommand('STOP_ALL')") Stop All Pumps
-    button(onclick="sendCommand('DELAY_10')") Delay 10 Seconds
+    //- button(onclick="sendCommand('STOP_PUMP_3')") Stop Pump 3
 
-    h2 Data obtained from database:
-    if sensors && sensors.length 
-      ul 
-      each sensor in sensors 
-        li #{sensor.sensorType}: #{sensor.value} at #{sensor.timestamp}
-    else 
-      p No sensor data available.
 
-    h2 Weather log (working with weather API)
-    if weatherData
-      ul 
-      each data in weatherData
-        li (#{data.time}) 
-          ul 
-            li Precipitation: #{data.rainAmount}mm/h 
-            li Probability of precipitation:#{data.rainChance}%
-    else 
-      p No sensor data available.
+  div.vegSelction 
+    h3 Crop 1
+    div.selectedVegContainer
+      div.selectedVeg 
+        img(src='/images/svgs/Eggplant.svg' alt='Aubergine')
+      input(placeholder="Aubergine")
+      a(href="#")
+        img(src='/images/svgs/Settings.svg' alt='Settings')
+
+    h3 Crop 2  
+    div.selectedVegContainer
+      div.selectedVeg 
+        img(src='/images/svgs/Grains Of Rice.svg' alt='Rice')
+      input(placeholder="Rice")
+      a(href="#")
+        img(src='/images/svgs/Settings.svg' alt='Settings')
+
+    h3 Crop 3
+    div.selectedVegContainer
+      div.selectedVeg 
+        img(src='/images/svgs/Peas.svg' alt='Peas')
+      input(placeholder="Peas")
+      a(href="#")
+        img(src='/images/svgs/Settings.svg' alt='Settings')
+
+    h3 New Crop
+    div.selectedVegContainer
+      a
+        img(src='/images/svgs/Plus Math.svg', alt='Plus')
+      
+
+  div.graph   
+    h1 Graph
+    canvas(id="CO2_Graph_Canvas" role="img")
+  
+
+//-
+  h2 Data obtained from database:
+      if sensors && sensors.length 
+        ul 
+        each sensor in sensors 
+          li #{sensor.sensorType}: #{sensor.value} at #{sensor.timestamp}
+      else 
+        p No sensor data available.
+
+      h2 Weather log (working with weather API)
+      if weatherData
+        ul 
+        each data in weatherData
+          li (#{data.time}) 
+            ul 
+              li Precipitation: #{data.rainAmount}mm/h 
+              li Probability of precipitation:#{data.rainChance}%
+      else 
+        p No sensor data available.
+
+

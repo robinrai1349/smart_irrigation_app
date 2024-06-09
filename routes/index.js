@@ -11,8 +11,7 @@ router.get('/', async (req, res) => {
     try {
       const weatherData = await getWeather(lat, lon);
       const sensors = await getSensorData();
-      
-      res.render('index', { title: 'Smart Irrigation System', weatherData, sensors});
+      res.render('index', { title: 'CONTROL CENTRE', weatherData, sensors});
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
