@@ -1,8 +1,166 @@
+
 body {
-  padding: 50px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 8% 37% 55%;
+  position: absolute;
+  margin: 0;
+  background: linear-gradient(
+    -151deg, 
+    #001958 1%,
+    #001A5D 24%,
+    #0035BE 60%,
+    #651959 100%
+  );
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+}
+
+header{
+  display: flex;
+  align-items: center;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background-color: #000000;
+}
+
+h1{
+  margin: 0 10px;
+  font-size: large;
+  letter-spacing: 3px
+}
+
+h2{
+  position: absolute;
+  right: 40px;
+}
+
+button {
+  height: 50px;
+  width: 200px;
+  cursor: pointer;
+}
+
+header img{
+  display: block;
+  padding: 30px 10px;
+  max-height: 50px;
+}
+
+header > a{
+  position: absolute;
+  right: 100px;
+}
+
+body > div{
+  margin: 4%;
+  padding: 4%;
+  background-color: rgba(0, 0, 0, 0.87);
+}
+
+ul{
+  list-style: none;
+}
+
+
+
+
+.onOffControl{
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  grid-template-rows: repeat(3, 33%);
+  margin-bottom: 0;
+  margin-right: 2%;
+  place-items: center;
+}
+
+.onOffControl img{
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-row-end: 4;
+}
+
+.onOffControl h4{
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+div.onOffControl > button:nth-child(7){
+  grid-column-start: 3;
+  grid-row-start: -2;
+  grid-row-end: -1;
+}
+
+div.onOffControl > button:nth-child(6){
+  grid-column-start: 3;
+  grid-row-start: -3;
+  grid-row-end: -2;
+}
+
+div.onOffControl > button:nth-child(5){
+  grid-column-start: 3;
+  grid-row-start: -4;
+  grid-row-end: -3;
+}
+
+
+
+
+
+.graph{
+  margin-right: 2%;
+}
+
+
+
+
+.vegSelction{
+  display: flex;
+  flex-direction: column;
+  margin-left: 2%;
+  grid-column-start: 2;
+  grid-row-start: -3;
+  grid-row-end: -1;
+}
+
+.selectedVegContainer{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.selectedVegContainer input{
+  width:55%;
+  height: 30%;
+  margin-top: 5%;
+  margin-right: 4%;
+  /* Background colour doesnt seem to work */
+}
+
+.selectedVeg{
+  display: flex;
+  justify-content: center;
+  height: 33%;
+  margin: 0 5%;
+  border-radius: 20px;
+  background-color: #0534B9;
+  width: 110px;
+  height: 110px;
+}
+
+
+
+.vegSelction img{
+  margin: 0 5%;
+  display: block;
+  padding: 30px 10px;
+  max-height: 50px;
 }
 
 a {
+  cursor: pointer;
   color: #00B7FF;
 }

@@ -9,7 +9,7 @@ function sendCommand(command) {
     .then(response => response.text())
     .then(data => {
         console.log(data);
-        alert(data);
+        //alert(data);
     })
     .catch((error) => {
         console.error('Error:', error);
