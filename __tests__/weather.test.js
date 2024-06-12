@@ -9,9 +9,8 @@ describe('Weather Forecast', () => {
         getWeather.mockResolvedValue([
             {
                 date: 1623234000,
-                temperature: 30,
-                rainChance: 20,
-                rainAmount: 5
+                rainChance: 80,
+                rainAmount: 1
             }
         ]);
     });
@@ -24,9 +23,8 @@ describe('Weather Forecast', () => {
         expect(res.body).toEqual([
             {
                 date: 1623234000,
-                temperature: 30,
-                rainChance: 20,
-                rainAmount: 5
+                rainChance: 80,
+                rainAmount: 1
             }
         ]);
     });
