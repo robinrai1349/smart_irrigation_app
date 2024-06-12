@@ -6,6 +6,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var dgram = require('dgram');  // Add the dgram module
+const WeatherData = require('./models/weather');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -16,13 +17,28 @@ var weatherRouter = require('./routes/weather');
 
 var app = express();
 
-<<<<<<< Updated upstream
-// Define ESP connection details
-const UDP_HOST = '192.168.137.229'; 
-=======
+ 
 // Define UDP server details
 const UDP_HOST = '192.168.137.38'; 
->>>>>>> Stashed changes
+
+// Function to mark rain events
+const markRainEvents = (weatherData) => {
+    const rainEvents = [];
+
+    weatherData.forEach(entry => {
+        if (entry.rainChance > 70 && entry.rainAmount > 0.5) {
+            rainEvents.push({
+                time: entry.time,
+                duration: 3,
+            });
+        }
+    });
+
+    return rainEvents;
+}
+
+// Define ESP connection details
+const UDP_HOST = '192.168.137.38'; 
 const UDP_PORT = 4210; 
 
 // Function to send UDP commands
