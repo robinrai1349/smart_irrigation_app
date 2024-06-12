@@ -1,5 +1,10 @@
 const axios = require('axios');
 const WeatherData = require('../models/weather');
+const rainEventData = require('../models/rainEvent');
+
+const dotenv = require('dotenv');
+// Load environment variables from .env file
+dotenv.config();
 
 const API_KEY = process.env.OPENWEATHERMAP_API_KEY;
 const baseUrl = 'https://api.openweathermap.org/data/2.5/forecast';
@@ -28,6 +33,22 @@ const getWeather = async (lat, lon) => {
   }
 };
 
+// Function to mark rain events
+const markRainEvents = (weatherData) => {
+  const rainEvents = [];
+
+  weatherData.forEach(entry => {
+      if (entry.rainChance > 70 && entry.rainAmount > 0.5) {
+          rainEvents.push({
+              time: entry.time,
+              duration: 3,
+          });
+      }
+  });
+
+  return rainEvents;
+}
+
 const sendWeatherData = async (lat, lon) => {
   try {
     const response = await axios.get(baseUrl, {
@@ -46,6 +67,10 @@ const sendWeatherData = async (lat, lon) => {
         };
     });
 
+    // save rainEvents to MongoDB
+    const rainEvents = markRainEvents(weatherData);
+    await rainEventData.insertMany(rainEvents);
+
     // save weatherData to MongoDB
     await WeatherData.insertMany(weatherData);
 
@@ -60,7 +85,7 @@ const fetchWeatherData = async () => {
     const weatherData = await WeatherData.find();
 
     const formattedData = weatherData.map(data => ({
-      time: new Date(data.time).toLocaleString(),
+      time: new Date(data.time).toLocaleString('en-GB'),
       rainChance: data.rainChance,
       rainAmount: data.rainAmount
     }));
@@ -73,4 +98,21 @@ const fetchWeatherData = async () => {
   }
 };
 
-module.exports = { getWeather, fetchWeatherData, sendWeatherData };
+const fetchRainEvents = async () => {
+  try {
+    const rainEventDatas = await rainEventData.find();
+
+    const formattedData = rainEventDatas.map(data => ({
+      time: new Date(data.time).toLocaleString('en-GB'),
+      duration: data.duration
+    }));
+
+    return formattedData;
+    
+  } catch (err) {
+    console.error('Failed to fetch weather data:', err.message);
+    throw err;
+  }
+};
+
+module.exports = { getWeather, fetchWeatherData, sendWeatherData, fetchRainEvents };
