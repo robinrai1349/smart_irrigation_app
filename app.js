@@ -7,6 +7,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var dgram = require('dgram');  // Add the dgram module
 const WeatherData = require('./models/weather');
+const rainEventData = require('./models/rainEvent');
+const { fetchRainEvents, fetchWeatherData } = require('./controllers/weatherService');
+
+// SETTINGS:
+const DELAY_IN_MINUTES = 30; // current delay for pumpDelayHandler (in minutes)
 
 // Load environment variables from .env file
 dotenv.config();
@@ -17,41 +22,51 @@ var weatherRouter = require('./routes/weather');
 
 var app = express();
 
-// Function to mark rain events
-const markRainEvents = (weatherData) => {
-    const rainEvents = [];
-
-    weatherData.forEach(entry => {
-        if (entry.rainChance > 70 && entry.rainAmount > 0.5) {
-            rainEvents.push({
-                time: entry.time,
-                duration: 3,
-            });
-        }
-    });
-
-    return rainEvents;
-}
-
 // Define ESP connection details
-const UDP_HOST = '192.168.137.229'; 
+const UDP_HOST = '192.168.137.220'; 
 const UDP_PORT = 4210; 
 
+
+
 // Function to send UDP commands
-function sendUdpCommand(command, res) {
+function sendUdpCommand(command) {
     const message = Buffer.from(command);
     const client = dgram.createSocket('udp4');
     client.send(message, UDP_PORT, UDP_HOST, (err) => {
         client.close();
         if (err) {
             console.error(`Failed to send command: ${command}`, err);
-            res.status(500).send(`Failed to send command: ${command}`);
         } else {
             console.log(`Command sent: ${command}`);
-            res.status(200).send(`Command sent: ${command}`);
         }
     });
 }
+
+const pumpDelayHandler = async () => {
+    const rainEvents = await fetchRainEvents();
+
+    // Find next rain event within 1 hour
+    const nextRainEvent = rainEvents.find(event => {
+        const timeDiff = event.time - Date.now();
+        return timeDiff > 0 && timeDiff <= 3600000; // Within 1 hour
+    });
+    // Upcoming rain event:
+    console.log(nextRainEvent)
+    if (nextRainEvent) {
+        console.log(nextRainEvent)
+        await rainEventData.deleteOne({ time: nextRainEvent.time });
+        const message = `DELAY_${nextRainEvent.duration}`;
+        sendUdpCommand(message);
+        
+        // Remove the nextRainEvent from the database
+        
+    }
+};
+
+
+// Schedule the event listener to run
+// current delay (in minutes) = DELAY_IN_MINUTES
+setInterval(pumpDelayHandler, 1000 * 60 * DELAY_IN_MINUTES)
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)
