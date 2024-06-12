@@ -19,7 +19,7 @@ exports.getHomePage = async (req, res) => {
     }
 };
 
-exports.getAllSensorData = async (req, res) => {
+const getAllSensorData = async (req, res) => {
     try {
         const data = await Sensor.find();
         res.status(200).json(data);
@@ -37,4 +37,4 @@ const getSensorData = async (lat, lon) => {
     }
 }
 
-module.exports = { getSensorData };
+module.exports = { getSensorData, getAllSensorData};

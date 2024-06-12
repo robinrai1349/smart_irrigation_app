@@ -6,6 +6,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var dgram = require('dgram');  // Add the dgram module
+//nodecron for scheduling:
+const cron = require('node-cron'); 
+const { fetchAndSaveWeatherData } = require('./controllers/weatherService');
+
 
 // Load environment variables from .env file
 dotenv.config();
@@ -68,6 +72,12 @@ app.post('/send-command', (req, res) => {
     } else {
         res.status(400).send('No command provided');
     }
+});
+
+// schedule task to fetch and save weather data every 24 hours:
+cron.schedule('0 0 * * *', () => {
+    console.log('Running a task every 24 hours to fetch and save weather data');
+    fetchAndSaveWeatherData();
 });
 
 // catch 404 and forward to error handler
