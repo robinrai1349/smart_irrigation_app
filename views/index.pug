@@ -53,10 +53,49 @@ block content
         img(src='/images/svgs/Plus Math.svg', alt='Plus')
       
 
-  div.graph   
+  div.graph
     h1 Graph
-    canvas(id="CO2_Graph_Canvas" role="img")
-  
+    canvas(id="weatherChart" width="800" height="400")
+    script.
+      document.addEventListener('DOMContentLoaded', function() {
+        const weatherData = !{JSON.stringify(weatherData)};
+        if (!weatherData) {
+          console.error('Weather data not available');
+          return;
+        }
+
+        const ctx = document.getElementById('weatherChart').getContext('2d');
+        const labels = weatherData.map(data => data.time);
+        const rainChances = weatherData.map(data => data.rainChance);
+        const rainAmounts = weatherData.map(data => data.rainAmount);
+
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Rain Chance',
+              data: rainChances,
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            }, {
+              label: 'Rain Amount',
+              data: rainAmounts,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      });
 
 //-
   h2 Data obtained from database:
