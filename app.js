@@ -26,8 +26,6 @@ var app = express();
 const UDP_HOST = '192.168.137.220'; 
 const UDP_PORT = 4210; 
 
-
-
 // Function to send UDP commands
 function sendUdpCommand(command) {
     const message = Buffer.from(command);
