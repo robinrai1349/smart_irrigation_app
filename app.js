@@ -16,8 +16,13 @@ var weatherRouter = require('./routes/weather');
 
 var app = express();
 
+<<<<<<< Updated upstream
 // Define ESP connection details
 const UDP_HOST = '192.168.137.229'; 
+=======
+// Define UDP server details
+const UDP_HOST = '192.168.137.38'; 
+>>>>>>> Stashed changes
 const UDP_PORT = 4210; 
 
 // Function to send UDP commands
