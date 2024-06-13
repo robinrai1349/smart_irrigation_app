@@ -136,7 +136,6 @@ div.onOffControl > button:nth-child(5){
   height: 30%;
   margin-top: 5%;
   margin-right: 4%;
-  /* Background colour doesnt seem to work */
 }
 
 .selectedVeg{
@@ -172,7 +171,7 @@ a {
 
 
 .vegSelectionMenu{
-  padding: 0 5%;
+  padding: 0 4%;
   display: grid;
   height: 100%;
   grid-template-columns: repeat(4, 25%);
@@ -181,6 +180,7 @@ a {
 
 .vegSelectionMenu .selectedVeg:hover{
   outline: 9px solid white;
+  cursor: pointer;
 }
 
 
