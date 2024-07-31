@@ -12,7 +12,8 @@
 - [Acknowledgements](#acknowledgements)
 
 ## Overview
-This project consisted of developing a smart irrigation control system prototype that optimises water usage based on real-time weather forecasts and sensor data. The system integrates with the OpenWeatherMap API to fetch weather data and triggers actions, such as delaying irrigation, based on upcoming rain events. Commands are sent to an external arduino hardware
+This project consisted of developing a smart irrigation control system prototype that optimises water usage based on real-time weather forecasts and sensor data. The system integrates with the OpenWeatherMap API to fetch weather data and triggers actions, such as delaying irrigation, based on upcoming rain events. Commands are sent to an external arduino hardware  
+
 
 The system sends UDP commands through an ESP connection to an external Arduino hardware, which manages the pumps. This setup ensures that the irrigation system is responsive and can effectively save water by not watering the crops when rain is imminent.
 ## Key Features:
